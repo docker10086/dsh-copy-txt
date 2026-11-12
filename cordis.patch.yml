@@ -1,0 +1,4 @@
+# dsh-copy-txt — 长文本粘贴转 txt 附件
+- insert:
+    - id: copy-txt
+      name: dsh-copy-txt

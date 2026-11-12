@@ -1,0 +1,50 @@
+{
+  "name": "dsh-copy-txt",
+  "version": "1.0.0",
+  "description": "Paste long text into the DeepSeek Harness composer as a .txt attachment instead of flooding the input box — ChatGPT-style.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "paste",
+    "attachment",
+    "composer"
+  ],
+  "license": "MIT",
+  "author": "docker10086",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/docker10086/dsh-copy-txt.git"
+  },
+  "homepage": "https://github.com/docker10086/dsh-copy-txt",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web"
+    }
+  }
+}
