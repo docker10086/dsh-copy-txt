@@ -34,8 +34,6 @@ window.__ModuleLoader__.load({
       ".dsh-ctx-input:focus{outline:none;border-color:var(--dsw-alias-brand-primary);}",
       ".dsh-ctx-check{width:16px;height:16px;accent-color:var(--dsw-alias-state-business-primary);cursor:pointer;}",
       ".dsh-ctx-checkText{font-size:14px;line-height:22px;color:var(--dsw-alias-label-primary);cursor:pointer;display:inline-flex;align-items:center;gap:8px;}",
-      ".dsh-ctx-toast{z-index:4000;position:fixed;left:50%;bottom:88px;transform:translateX(-50%);padding:8px 14px;border-radius:18px;background:var(--dsw-alias-button-contrast-fill, #1f1f1f);color:var(--dsw-alias-label-primary-inverted, #fff);font-size:13px;line-height:20px;box-shadow:var(--dsw-elevation-panel, 0 8px 24px rgba(0,0,0,.24));pointer-events:none;opacity:0;transition:opacity .18s ease;}",
-      ".dsh-ctx-toast.show{opacity:1;}",
     ].join("\n");
 
     function clampInt(value, min, max, fallback) {
@@ -190,24 +188,6 @@ window.__ModuleLoader__.load({
       }
     }
 
-    let toastEl = null;
-    let toastTimer = 0;
-    function showToast(message) {
-      if (typeof document === "undefined") return;
-      if (toastEl === null) {
-        toastEl = document.createElement("div");
-        toastEl.className = "dsh-ctx-toast";
-        toastEl.setAttribute("role", "status");
-        document.body.appendChild(toastEl);
-      }
-      toastEl.textContent = message;
-      toastEl.classList.add("show");
-      if (toastTimer) window.clearTimeout(toastTimer);
-      toastTimer = window.setTimeout(() => {
-        toastEl.classList.remove("show");
-      }, 1800);
-    }
-
     function makeTxtFile(text) {
       const name = `粘贴的文本 (${timestamp()}).txt`;
       return new File([text], name, {
@@ -279,10 +259,7 @@ window.__ModuleLoader__.load({
           event.preventDefault();
           event.stopImmediatePropagation();
 
-          const file = makeTxtFile(text);
-          if (attachFile(file)) {
-            showToast(`已转为附件：${file.name}`);
-          }
+          attachFile(makeTxtFile(text));
         };
 
         document.addEventListener("paste", onPaste, true);

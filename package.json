@@ -1,6 +1,6 @@
 {
   "name": "dsh-copy-txt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Paste long text into the DeepSeek Harness composer as a .txt attachment instead of flooding the input box — ChatGPT-style.",
   "keywords": [
     "dsh",
